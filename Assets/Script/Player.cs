@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        GameState.Instance.currentState = GameState.State.Playing;
     }
 
     // Update is called once per frame
@@ -159,17 +160,42 @@ public class Player : MonoBehaviour
     #region INPUT
     void OnMove(InputValue moveValue)
     {
-        Vector2 moveVector = moveValue.Get<Vector2>();
+        if (GameState.Instance.IsPlaying()) 
+        { 
+            Vector2 moveVector = moveValue.Get<Vector2>();
 
-        moveX = moveVector.x;
-        moveY = moveVector.y;
+            moveX = moveVector.x;
+            moveY = moveVector.y;
+        }
     }
 
     void OnFire()
     {
-        //Debug.Log("Fire");
-        
-        Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
+        if (GameState.Instance.IsPlaying())
+        {
+            //Debug.Log("Fire");
+
+            Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
+        }
+    }
+
+    void OnPause()
+    {
+        switch (GameState.Instance.currentState)
+        {
+            case (GameState.State.Playing):
+                {
+                    GameState.Instance.currentState = GameState.State.Paused;
+                    Time.timeScale = 0;
+                    break;
+                }
+            case (GameState.State.Paused):
+                {
+                    GameState.Instance.currentState = GameState.State.Playing;
+                    Time.timeScale = 1;
+                    break;
+                }
+        }
     }
     #endregion
 }

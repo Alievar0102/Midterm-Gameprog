@@ -1,10 +1,16 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject Object;
+    public GameObject enemy;
     public float spawnRate = 1f;
     public float timer = 0f;
+
+    [Header("Object Counter")]
+    public int count;
+    public int maxObjectCount = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,12 +25,22 @@ public class Spawner : MonoBehaviour
         if (timer >= spawnRate)
         {
             float randomIndex = Random.Range(-8, 8); //cari nilai random untuk transform.position.x
-            Instantiate(Object, new Vector2(randomIndex, transform.position.y), Quaternion.identity);
+            SpawnObject(enemy, randomIndex, transform.position.y, Quaternion.identity);
             timer = 0f;
         }
         else
         {
-            timer += Time.deltaTime;
+            if(count < maxObjectCount) //hanya bisa hitung jika belum sampai jumlah maksimal
+            {
+                timer += Time.deltaTime;
+            }
         }
+    }
+
+    void SpawnObject(GameObject @object, float x, float y, Quaternion rotation)
+    {
+        //spawn object dan tambah count
+        Instantiate(@object, new Vector2(x, y), rotation);
+        count++;
     }
 }

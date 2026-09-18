@@ -1,9 +1,11 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
     Logic logic;
+    Spawner spawner;
 
     public float speed = 1f;
 
@@ -17,6 +19,7 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         logic = FindFirstObjectByType<Logic>(); //cari di scene
+        spawner = FindFirstObjectByType<Spawner>();
     }
 
     // Update is called once per frame
@@ -40,6 +43,10 @@ public class Enemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision = null)
     {
         //Destroy saat kena deadzone
-        logic.DestroyWhenCollisDeadZone(this.gameObject, collision);
+        if (collision.gameObject.tag == "DeadZone")
+        {
+            spawner.count--; //kurangi count di Spawner.cs kalau enemy terkena DeadZone
+            Destroy(gameObject);
+        }
     }
 }
