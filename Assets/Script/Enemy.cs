@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        logic = FindFirstObjectByType<Logic>(); //find in scene
+        logic = FindFirstObjectByType<Logic>(); //cari di scene
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
         //Move
         rb.linearVelocity = new Vector2(0f, -speed);
 
-        //Enemy Firerate
+        //Firerate Enemy
         if(timer >= fireRate)
         {
             Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision = null)
     {
-        //Destroy when touch deadzone
+        //Destroy saat kena deadzone
         logic.DestroyWhenCollisDeadZone(this.gameObject, collision);
     }
 }
