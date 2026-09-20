@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: bce955d75e8af9f4e9e14835c7e476d6
+=======
+guid: 936c762db3782c9418c7eca3724b498b
+>>>>>>> b72181c (ganti Sprite, Tambah Holding Fire(Nembak tinggal tahan key))
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -15,6 +15,11 @@ public class Player : MonoBehaviour
     public float acceleration = 1f;
     public float deceleration = 1f;
 
+    [Header("Gun")]
+    public float fireRate = 1f;
+    public float timerFire;
+    public bool isHoldingFire = false;
+
     Rigidbody2D rb;
     [Header("Game Object")]
     public GameObject bulletPrefab;
@@ -25,12 +30,14 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         GameState.Instance.currentState = GameState.State.Playing;
+
+        timerFire = fireRate;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        #region Move
+        #region MOVE
         #region moveX
         if (moveX != 0)
         {
@@ -139,9 +146,41 @@ public class Player : MonoBehaviour
         }
         #endregion
         #endregion
+
+        #region FIRE
+        if (timerFire >= fireRate)
+        {
+            if (isHoldingFire)
+            {
+                Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
+                //Shoot();
+                timerFire = 0f;
+            }
+            else
+            {
+                timerFire = fireRate;
+            }
+        }
+        else
+        {
+            timerFire += Time.deltaTime;
+        }
+        #endregion
     }
 
-    #region OTHER METHOD
+    #region METHOD
+    #region MOVE
+    void OnMove(InputValue moveValue)
+    {
+        if (GameState.Instance.IsPlaying()) 
+        { 
+            Vector2 moveVector = moveValue.Get<Vector2>();
+
+            moveX = moveVector.x;
+            moveY = moveVector.y;
+        }
+    }
+
     float Accelerate(float speed, float acceleration)
     {
         speed += acceleration * Time.fixedDeltaTime;
@@ -157,27 +196,20 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    #region INPUT
-    void OnMove(InputValue moveValue)
-    {
-        if (GameState.Instance.IsPlaying()) 
-        { 
-            Vector2 moveVector = moveValue.Get<Vector2>();
-
-            moveX = moveVector.x;
-            moveY = moveVector.y;
-        }
-    }
-
-    void OnFire()
+    #region FIRE
+    void OnFire(InputValue fireValue)
     {
         if (GameState.Instance.IsPlaying())
         {
-            //Debug.Log("Fire");
-
-            Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
+            isHoldingFire = fireValue.isPressed;
         }
     }
+
+    void Shoot()
+    {
+        
+    }
+    #endregion
 
     void OnPause()
     {
