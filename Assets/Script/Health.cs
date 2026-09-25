@@ -30,15 +30,18 @@ public class Health : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Bullet bullet = FindFirstObjectByType<Bullet>();
-        if(bullet.isPlayer != isPlayer)
+        if(bullet != null)
         {
-            if (!isPlayer) //kalau bukan player akan mengurangi count pada Spawner.cs
+            if (bullet.isPlayer != isPlayer)
             {
-                spawner.count--;
+                if (!isPlayer) //kalau bukan player akan mengurangi count pada Spawner.cs
+                {
+                    spawner.count--;
+                }
+                Damage(bullet.damage);
+                Destroy(bullet.gameObject);
+                Debug.Log("Bullet hit " + gameObject.name + " for " + bullet.damage + " damage. Remaining HP: " + health);
             }
-            Damage(bullet.damage);
-            Destroy(bullet.gameObject);
-            Debug.Log("Bullet hit " + gameObject.name + " for " + bullet.damage + " damage. Remaining HP: " + health);
         }
     }
 }

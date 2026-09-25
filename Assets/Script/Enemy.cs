@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
 
     public float speed = 1f;
 
+    [Header("Gun")]
     public GameObject bulletPrefab;
     public GameObject gun;
     public float fireRate = 1f;
@@ -23,7 +24,7 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Move
         rb.linearVelocity = new Vector2(0f, -speed);
@@ -36,7 +37,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            timer += Time.deltaTime;
+            timer += Time.fixedDeltaTime;
         }
     }
 

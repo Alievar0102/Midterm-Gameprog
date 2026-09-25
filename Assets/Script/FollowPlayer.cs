@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class FollowObject : MonoBehaviour
+public class FollowPlayer : MonoBehaviour
 {
     public float speedX = 1f;
     public float speedY = 1f;
     Rigidbody2D rb;
     Transform target;
     Vector2 moveDirection;
-    public GameObject objectToFollow;
 
     private void Awake()
     {
@@ -17,23 +16,26 @@ public class FollowObject : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        target = objectToFollow.transform;
+        //target player
+        target = GameObject.Find("Player").transform; //cari game object di scene
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (target)
+        if (target != null)
         {
-            Vector3 direction = (target.position - transform.position).normalized;
+            //arahkan ke target
+            Vector2 direction = (target.position - transform.position).normalized;
             moveDirection = direction;
         }
     }
 
     private void FixedUpdate()
     {
-        if (target)
+        if (target != null)
         {
+            //bergerak sesuai arahan
             rb.linearVelocity = new Vector2(moveDirection.x * speedX, moveDirection.y * speedY);
         }
     }

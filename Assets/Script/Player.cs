@@ -150,10 +150,9 @@ public class Player : MonoBehaviour
         #region FIRE
         if (timerFire >= fireRate)
         {
-            if (isHoldingFire)
+            if (isHoldingFire) //kalau HoldingFire true tembak
             {
                 Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
-                //Shoot();
                 timerFire = 0f;
             }
             else
@@ -201,13 +200,9 @@ public class Player : MonoBehaviour
     {
         if (GameState.Instance.IsPlaying())
         {
+            //ambil value HoldingFire
             isHoldingFire = fireValue.isPressed;
         }
-    }
-
-    void Shoot()
-    {
-        
     }
     #endregion
 
