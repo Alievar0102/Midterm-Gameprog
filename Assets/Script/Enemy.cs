@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
 
     public float speed = 1f;
 
+    [Header("Gun")]
     public GameObject bulletPrefab;
     public GameObject gun;
     public float fireRate = 1f;
@@ -20,10 +21,12 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         logic = FindFirstObjectByType<Logic>(); //cari di scene
         spawner = FindFirstObjectByType<Spawner>();
+
+        timer = fireRate; //Enemy langsung tembak saat spawn
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Move
         rb.linearVelocity = new Vector2(0f, -speed);
@@ -36,7 +39,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            timer += Time.deltaTime;
+            timer += Time.fixedDeltaTime;
         }
     }
 
@@ -45,7 +48,7 @@ public class Enemy : MonoBehaviour
         //Destroy saat kena deadzone
         if (collision.gameObject.tag == "DeadZone")
         {
-            spawner.count--; //kurangi count di Spawner.cs kalau enemy terkena DeadZone
+            //spawner.count--; //kurangi count di Spawner.cs kalau enemy terkena DeadZone
             Destroy(gameObject);
         }
     }

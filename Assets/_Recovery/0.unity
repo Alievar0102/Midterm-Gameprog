@@ -354,6 +354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   health: 100
   isPlayer: 1
+  isBullet: 0
 --- !u!95 &383765944
 Animator:
   serializedVersion: 7
@@ -1313,32 +1314,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossS
       objectReference: {fileID: 0}
-    - target: {fileID: 6614491880090121515, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
-      propertyPath: m_Size.y
-      value: 2.3884363
-      objectReference: {fileID: 0}
-    - target: {fileID: 6614491880090121515, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.35286856
-      objectReference: {fileID: 0}
     - target: {fileID: 6948324708390848730, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
       propertyPath: health
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 6972810631139611661, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
-      propertyPath: speedX
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7494487863509184688, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
       propertyPath: fireRate
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7494487863509184688, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
       propertyPath: spawnRate
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7494487863509184688, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
-      propertyPath: rateOfFire
       value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1509,7 +1494,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1333360577
 Transform:
   m_ObjectHideFlags: 0
@@ -1540,6 +1525,8 @@ MonoBehaviour:
   enemy: {fileID: 1105968702196698972, guid: 4b4e7b53f131ed04885fb65590ff7b33, type: 3}
   spawnRate: 5
   timer: 0
+  count: 0
+  maxObjectCount: 4
 --- !u!1 &1345410687
 GameObject:
   m_ObjectHideFlags: 0
