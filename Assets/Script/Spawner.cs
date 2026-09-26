@@ -8,9 +8,11 @@ public class Spawner : MonoBehaviour
     public float spawnRate = 1f;
     public float timer = 0f;
 
+    /*
     [Header("Object Counter")]
     public int count;
     public int maxObjectCount = 1;
+    */
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,10 +32,11 @@ public class Spawner : MonoBehaviour
         }
         else
         {
-            if(count < maxObjectCount) //hanya bisa hitung jika belum sampai jumlah maksimal
+            timer += Time.deltaTime;
+            /*if (count < maxObjectCount) //hanya bisa hitung jika belum sampai jumlah maksimal
             {
                 timer += Time.deltaTime;
-            }
+            }*/
         }
     }
 
@@ -41,6 +44,6 @@ public class Spawner : MonoBehaviour
     {
         //spawn object dan tambah count
         Instantiate(@object, new Vector2(x, y), rotation);
-        count++;
+        //count++;
     }
 }

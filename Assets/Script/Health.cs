@@ -4,6 +4,7 @@ public class Health : MonoBehaviour
 {
     public int health = 1;
     public bool isPlayer = false;
+    //public bool isBullet = false;
     Spawner spawner;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,15 +30,15 @@ public class Health : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Bullet bullet = FindFirstObjectByType<Bullet>();
-        if(bullet != null)
+        //Bullet bullet = FindFirstObjectByType<Bullet>(); // cari bullet pertama di hierarchy
+        if(collision.TryGetComponent<Bullet>(out Bullet bullet)) //Kalau ada component Bullet(Script), ciptakan variabel "Bullet bullet"
         {
             if (bullet.isPlayer != isPlayer)
             {
-                if (!isPlayer) //kalau bukan player akan mengurangi count pada Spawner.cs
+                /*if (!isPlayer && !isBullet) //kalau bukan player akan mengurangi count pada Spawner.cs
                 {
                     spawner.count--;
-                }
+                }*/
                 Damage(bullet.damage);
                 Destroy(bullet.gameObject);
                 Debug.Log("Bullet hit " + gameObject.name + " for " + bullet.damage + " damage. Remaining HP: " + health);

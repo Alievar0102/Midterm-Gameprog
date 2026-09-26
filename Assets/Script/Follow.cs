@@ -1,23 +1,24 @@
 using UnityEngine;
 
-public class FollowPlayer : MonoBehaviour
+public class Follow : MonoBehaviour
 {
     public float speedX = 1f;
     public float speedY = 1f;
     Rigidbody2D rb;
-    Transform target;
-    Vector2 moveDirection;
+    public Transform target;
+    public Vector2 moveDirection;
+    public bool isNormalizeVector = false;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        target = GameObject.Find("Player").transform; //cari game object di scene
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //target player
-        target = GameObject.Find("Player").transform; //cari game object di scene
     }
 
     // Update is called once per frame
@@ -25,8 +26,16 @@ public class FollowPlayer : MonoBehaviour
     {
         if (target != null)
         {
+            Vector2 direction;
             //arahkan ke target
-            Vector2 direction = (target.position - transform.position).normalized;
+            if (isNormalizeVector)
+            {
+                direction = (target.position - transform.position).normalized;
+            }
+            else
+            {
+                direction = (target.position - transform.position);
+            }
             moveDirection = direction;
         }
     }

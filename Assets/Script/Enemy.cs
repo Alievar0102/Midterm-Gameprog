@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         logic = FindFirstObjectByType<Logic>(); //cari di scene
         spawner = FindFirstObjectByType<Spawner>();
+
+        timer = fireRate; //Enemy langsung tembak saat spawn
     }
 
     // Update is called once per frame
@@ -46,7 +48,7 @@ public class Enemy : MonoBehaviour
         //Destroy saat kena deadzone
         if (collision.gameObject.tag == "DeadZone")
         {
-            spawner.count--; //kurangi count di Spawner.cs kalau enemy terkena DeadZone
+            //spawner.count--; //kurangi count di Spawner.cs kalau enemy terkena DeadZone
             Destroy(gameObject);
         }
     }

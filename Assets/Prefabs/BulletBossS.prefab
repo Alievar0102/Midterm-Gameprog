@@ -86,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: c924d974afabb4743986664d0627a6d9, type: 3}
+  m_Sprite: {fileID: -895134444288964592, guid: 86f768b959e633f4cbf9994defad5efd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,17 +130,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.06333947, y: -0.09188402}
+  m_Offset: {x: 0.012978554, y: 0.07598615}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 3.2933333, y: 3.4133334}
     newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.575203, y: 1.7802262}
+  m_Size: {x: 2.548849, y: 2.65315}
   m_EdgeRadius: 0
 --- !u!50 &2402323681287068273
 Rigidbody2D:
@@ -198,7 +198,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FollowObject
   speedX: 2
   speedY: 2
-  objectToFollow: {fileID: 0}
+  target: {fileID: 0}
+  moveDirection: {x: 0, y: 0}
+  isNormalizeVector: 1
 --- !u!114 &255572851251357121
 MonoBehaviour:
   m_ObjectHideFlags: 0
