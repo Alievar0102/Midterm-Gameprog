@@ -24,6 +24,11 @@ public class BossS : MonoBehaviour
     public float spawnRate = 1f;
     public float timerSpawn = 0f;
 
+    [Header("Animator Stuff")]
+    Animator anim;
+    Health health;
+    int currentHealth;
+
     void Start()
     {
         fireRate = rateOfFire;
@@ -46,8 +51,14 @@ public class BossS : MonoBehaviour
         move2PositionObject.transform.position = defaultPosition;
         #endregion
 
+        //Follow script
         follow = GetComponent<Follow>();
         follow.target = null;
+
+        anim = GetComponentInChildren<Animator>();
+
+        health = GetComponent<Health>();
+        currentHealth = health.health;
     }
 
     void FixedUpdate()
@@ -55,11 +66,16 @@ public class BossS : MonoBehaviour
         //Firerate Boss
         if (timerFire >= fireRate)
         {
+            anim.SetBool("isAttack", true); //set animasi attack
             Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
             timerFire = 0f;
         }
         else
         {
+            if(timerSpawn < spawnRate) //agar animasi attack tidak reset saat bos sedang special move
+            {
+                anim.SetBool("isAttack", false); //Reset animasi attack
+            }
             timerFire += Time.fixedDeltaTime;
         }
 
@@ -80,6 +96,7 @@ public class BossS : MonoBehaviour
             if(follow.target != null)
             {
                 float distanceX = Mathf.Abs(transform.position.x - defaultTransform.position.x); //cari nilai mutlak untuk distanceX
+                anim.SetBool("isAttack", false); //Reset animasi attack
                 if (distanceX < 0.1) //kalau sudah sangat dekat(sampai) dengan defaultTransform, reset ke posisi awal
                 {
                     rb.linearVelocity = Vector2.zero; //hentikan pergerakan rigidbody2D
@@ -90,6 +107,16 @@ public class BossS : MonoBehaviour
             }
 
             timerSpawn += Time.fixedDeltaTime;
+        }
+
+        if (currentHealth > health.health)
+        {
+            anim.SetBool("isHit", true);
+            currentHealth = health.health;
+        }
+        else
+        {
+            anim.SetBool("isHit", false);
         }
     }
 
@@ -109,6 +136,8 @@ public class BossS : MonoBehaviour
         }
         else
         {
+            anim.SetBool("isAttack", true); //Set animasi attack
+
             //Spawn enemy
             Instantiate(enemyPrefab, new Vector2(gun.transform.position.x, gun.transform.position.y), Quaternion.identity);
             Instantiate(enemyPrefab, new Vector2(gun.transform.position.x - 1.5f, gun.transform.position.y), Quaternion.identity);
@@ -160,6 +189,7 @@ public class BossS : MonoBehaviour
                 fireRate = 0.5f;
                 if(timerFire >= fireRate)
                 {
+                    anim.SetBool("isAttack", true); //Set animasi attack
                     countFire++;
                 }
             }
