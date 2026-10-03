@@ -169,6 +169,7 @@ public class Player : MonoBehaviour
             if (isHoldingFire) //kalau HoldingFire true tembak
             {
                 Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
+                AudioManager.Instance.PlayShootPlayer();
                 timerFire = 0f;
             }
             else

@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
         if(timer >= fireRate)
         {
             Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
+            //Music place TODO: AudioManager.Instance.PlayShootEnemy();
             timer = 0f;
         }
         else
