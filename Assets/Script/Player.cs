@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     [Header("Game Object")]
     public GameObject bulletPrefab;
     public GameObject gun;
+    bool isKnockbacked = false;
+    float knockbackDuration = 0.5f; // Durasi knockback
+    float knockbackTimer = 0f; // Timer Knockback
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,6 +40,19 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(isKnockbacked)
+        {
+            knockbackTimer += Time.fixedDeltaTime;
+            if (knockbackTimer >= knockbackDuration)
+            {
+                isKnockbacked = false;
+                knockbackTimer = 0f;
+                speedX = 0f; // Reset speed
+                speedY = 0f; // Reset speed
+            }
+            return; // Skip fixed update  
+        }
+
         #region MOVE
         #region moveX
         if (moveX != 0)
@@ -222,6 +238,20 @@ public class Player : MonoBehaviour
                     Time.timeScale = 1;
                     break;
                 }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("BossS"))
+        {
+            isKnockbacked = true;
+            Debug.Log("Player hit by BossS");
+
+            //terkena Knockback
+            Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
+            float knockbackForce = 5f; // set value knockback force 
+            rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
         }
     }
     #endregion

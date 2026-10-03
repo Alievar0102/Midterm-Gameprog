@@ -565,6 +565,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossS
       objectReference: {fileID: 0}
+    - target: {fileID: 4945927370063486209, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
+      propertyPath: m_TagString
+      value: BossS
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215015157895624443, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215015157895624443, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
