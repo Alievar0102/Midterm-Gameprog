@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,5 +12,24 @@ public class UIMainMenu : MonoBehaviour
     public void LoadLevel(int levelNum)
     {
         SceneManager.LoadScene(levelNum);
+    }
+
+    public TextMeshProUGUI txtMaster;
+    public TextMeshProUGUI txtMusic;
+    public TextMeshProUGUI txtSFX;
+
+    public void ChangeMasterVolume(float volume)
+    {
+        txtMaster.text = volume.ToString() + "%";
+    }
+
+    public void ChangeMusicVolume(float volume)
+    {
+        txtMusic.text = volume.ToString() + "%";
+    }
+
+    public void ChangeSFXVolume(float volume)
+    {
+        txtSFX.text = volume.ToString() + "%";
     }
 }
