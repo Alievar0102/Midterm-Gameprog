@@ -10,6 +10,10 @@ public class Health : MonoBehaviour
     Spawner spawner;
     Logic logic;
 
+    SpriteRenderer spriteRenderer;
+    SpriteRenderer[] spriteRenderers;
+    public SpriteRenderer mobSize;
+
     public Slider slider;
 
     int maxHealth;
@@ -19,6 +23,9 @@ public class Health : MonoBehaviour
     {
         spawner = FindFirstObjectByType<Spawner>();
         logic = FindFirstObjectByType<Logic>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null) spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
 
         maxHealth = health;
 
@@ -47,6 +54,20 @@ public class Health : MonoBehaviour
                 Debug.Log(gameObject.name + " has been destroyed.");
                 logic.UpdateKillCount();
             }
+
+            float scale = 0;
+
+            if (spriteRenderer == null)
+            {
+                Bounds bounds = spriteRenderers[0].bounds;
+
+                for (int i = 1; i < spriteRenderers.Length; i++) bounds.Encapsulate(spriteRenderers[i].bounds);
+
+                scale = bounds.size.x / mobSize.bounds.size.x;
+            } else scale = spriteRenderer.bounds.size.x / mobSize.bounds.size.x;
+
+            SpecialEffectsHelper.Instance.Explode(transform.position, scale);
+
             Destroy(gameObject);
         }
     }

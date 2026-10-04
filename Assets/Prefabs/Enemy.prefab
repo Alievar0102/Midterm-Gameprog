@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1105968702196698972}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.99, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -201,6 +201,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   health: 1
   isPlayer: 0
+  isBullet: 0
+  mobSize: {fileID: 6547255647239240442}
+  slider: {fileID: 0}
 --- !u!95 &1695684946864162716
 Animator:
   serializedVersion: 7

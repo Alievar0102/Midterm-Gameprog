@@ -459,6 +459,7 @@ MonoBehaviour:
   health: 100
   isPlayer: 1
   isBullet: 0
+  mobSize: {fileID: 6547255647239240442, guid: 4b4e7b53f131ed04885fb65590ff7b33, type: 3}
   slider: {fileID: 1375429856}
 --- !u!95 &383765944
 Animator:
@@ -2577,6 +2578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1919871958}
   - component: {fileID: 1919871957}
+  - component: {fileID: 1919871959}
   m_Layer: 0
   m_Name: Logic
   m_TagString: Untagged
@@ -2606,12 +2608,25 @@ Transform:
   m_GameObject: {fileID: 1919871956}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.88, y: 5.99, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1919871959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919871956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee7b44ae4d42ce4eaba45e0725472d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpecialEffectsHelper
+  fireEffect: {fileID: 6565624491940330586, guid: 781e495fc9ec88b448026619bcfd2f35, type: 3}
 --- !u!1 &1928391247
 GameObject:
   m_ObjectHideFlags: 0

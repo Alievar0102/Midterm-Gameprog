@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class GameSettings : Singleton<GameSettings>
+public class GameSettings : MonoBehaviour
 {
-    public static GameSettings instance;
+    public static GameSettings Instance;
 
     public AudioMixer audioMixer;
 
@@ -21,9 +21,9 @@ public class GameSettings : Singleton<GameSettings>
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
