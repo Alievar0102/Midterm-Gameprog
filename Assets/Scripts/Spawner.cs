@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [Header("Enemy")]
     public GameObject enemy;
     public float spawnRate = 1f;
     public float timer = 0f;
+    public int KillCountToSpawnBoss = 10;
+
+    [Header("Boss")]
+    public GameObject boss;
+    bool bossSpawned = false;
 
     /*
     [Header("Object Counter")]
@@ -37,6 +43,13 @@ public class Spawner : MonoBehaviour
             {
                 timer += Time.deltaTime;
             }*/
+        }
+
+        //Spawn Boss
+        if (GameState.Instance.KillCount >= KillCountToSpawnBoss && !bossSpawned)
+        {
+            SpawnObject(boss, 0, transform.position.y, Quaternion.identity);
+            bossSpawned = true; //agar boss hanya spawn sekali
         }
     }
 

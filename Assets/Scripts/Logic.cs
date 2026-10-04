@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Logic : MonoBehaviour
 {
@@ -19,4 +21,15 @@ public class Logic : MonoBehaviour
             Destroy(target);
         }
     }
+
+    #region KillCount
+    public TMP_Text killCountText;
+
+    public void UpdateKillCount()
+    {
+        // Update kill count game state dan UI
+        GameState.Instance.KillCount++;
+        killCountText.text = GameState.Instance.KillCount.ToString();
+    }   
+    #endregion
 }

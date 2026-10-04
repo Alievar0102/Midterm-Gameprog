@@ -14,10 +14,10 @@ public class GameState : Singleton<GameState>
         set
         {
             killCount = value;
-            if (killCount == 1 && currentState == State.Playing)
+            /*if (killCount == 1 && currentState == State.Playing)
             {
                 currentState = State.Win;
-            }
+            }*/
         }
     }
 

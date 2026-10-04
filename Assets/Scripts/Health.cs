@@ -4,13 +4,15 @@ public class Health : MonoBehaviour
 {
     public int health = 1;
     public bool isPlayer = false;
-    //public bool isBullet = false;
+    public bool isBullet = false;
     Spawner spawner;
+    Logic logic;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         spawner = FindFirstObjectByType<Spawner>();
+        logic = FindFirstObjectByType<Logic>();
     }
 
     // Update is called once per frame
@@ -24,6 +26,11 @@ public class Health : MonoBehaviour
         health -= damage;
         if(health <= 0)
         {
+            if(!isPlayer && !isBullet)
+            {
+                Debug.Log(gameObject.name + " has been destroyed.");
+                logic.UpdateKillCount();
+            }
             Destroy(gameObject);
         }
     }
