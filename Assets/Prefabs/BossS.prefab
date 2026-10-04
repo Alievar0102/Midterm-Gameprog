@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 7494487863509184688}
   m_Layer: 7
   m_Name: BossS
-  m_TagString: Untagged
+  m_TagString: BossS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -365,7 +365,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4945927370063486209}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -415,6 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   health: 50
   isPlayer: 0
+  isBullet: 0
 --- !u!114 &7494487863509184688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9daae0aecafed4092b20b34943309b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  defaultPosition: {x: 0, y: 0}
+  defaultPosition: {x: 0, y: 3.54}
   random: 0
   bulletPrefab: {fileID: 3266298608603798659, guid: 2632937929c709a45bf242cfd1bccd10, type: 3}
   gun: {fileID: 1608527186236365564}

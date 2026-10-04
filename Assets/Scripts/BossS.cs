@@ -7,10 +7,16 @@ public class BossS : MonoBehaviour
     Follow follow;
 
     //Posisi default bos
-    public Vector2 defaultPosition;
+    public Vector2 defaultPosition = new Vector2(0, 3.54f);
     Transform defaultTransform;
 
+    //pastikan bos sudah sampai di posisi default sebelum bisa menyerang, boss awalnya tdak terlihat karena spawn di atas layar
+    bool inPosition = false;
+
     public int random;
+
+    //pastikan saat spawn, bos tidak langsung menyerang player
+    bool canAttack = false;
 
     [Header("Gun")]
     public GameObject bulletPrefab;
@@ -35,25 +41,25 @@ public class BossS : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
 
-        defaultPosition = transform.position; //posisi awal boss saat spawn
-
         random = Random.Range(0, 2);
+
         #region move1
         //Buat game object bantuan posisi bos untuk move 1
-        defaultPositionObject = new GameObject();
+        defaultPositionObject = new GameObject("DefaultPosition");
         defaultPositionObject.transform.position = defaultPosition;
         defaultTransform = defaultPositionObject.transform;
         #endregion
 
         #region move2
         //Buat game object bantuan posisi bos untuk move 2
-        move2PositionObject = new GameObject();
+        move2PositionObject = new GameObject("Move2Position");
         move2PositionObject.transform.position = defaultPosition;
         #endregion
 
         //Follow script
         follow = GetComponent<Follow>();
-        follow.target = null;
+        follow.target = defaultTransform;
+        follow.isNormalizeVector = true;
 
         anim = GetComponentInChildren<Animator>();
 
@@ -63,60 +69,84 @@ public class BossS : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Firerate Boss
-        if (timerFire >= fireRate)
+        if (!inPosition)
         {
-            anim.SetBool("isAttack", true); //set animasi attack
-            Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
-            timerFire = 0f;
-        }
-        else
-        {
-            if(timerSpawn < spawnRate) //agar animasi attack tidak reset saat bos sedang special move
+            follow.target = defaultTransform; //Menargetkan kembali ke posisi transform awal(defaultTransform)
+            timerFire = 0f; //pastikan timerFire tidak membuat bullet ter-spawn
+            timerSpawn = 0f; //pastikan timerSpawn tidak jalan
+            follow.speedY = 5f; //agar bos turun ke posisi default
+            float distance = Vector2.Distance(transform.position, defaultTransform.position); //cari nilai mutlak untuk distance
+            if (distance < 0.1) //kalau sudah sangat dekat(sampai) dengan defaultTransform, reset ke posisi awal
             {
-                anim.SetBool("isAttack", false); //Reset animasi attack
+                rb.linearVelocity = Vector2.zero; //hentikan pergerakan rigidbody2D
+                transform.position = defaultPosition; //Memastikan bos di posisi default
+
+                //Reset semua variabel
+                inPosition = true;
+                follow.isNormalizeVector = false;
+                follow.target = null;
+                canAttack = true;
+                health.health = currentHealth; //Pastikan health bos tidak berubah saat bos belum bisa menyerang
             }
-            timerFire += Time.fixedDeltaTime;
         }
 
-        //SpawnRate Boss
-        if (timerSpawn >= spawnRate)
+        if (canAttack)
         {
-            if(random == 0)
+            //Firerate Boss
+            if (timerFire >= fireRate)
             {
-                Move1();
+                anim.SetBool("isAttack", true); //set animasi attack
+                Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
+                timerFire = 0f;
             }
-            else if(random == 1)
+            else
             {
-                Move2();
-            }
-        }
-        else
-        {
-            if(follow.target != null)
-            {
-                float distanceX = Mathf.Abs(transform.position.x - defaultTransform.position.x); //cari nilai mutlak untuk distanceX
-                anim.SetBool("isAttack", false); //Reset animasi attack
-                if (distanceX < 0.1) //kalau sudah sangat dekat(sampai) dengan defaultTransform, reset ke posisi awal
+                if (timerSpawn < spawnRate) //agar animasi attack tidak reset saat bos sedang special move
                 {
-                    rb.linearVelocity = Vector2.zero; //hentikan pergerakan rigidbody2D
-                    transform.position = defaultPosition; //Memastikan bos di posisi default
-                    follow.target = null;
+                    anim.SetBool("isAttack", false); //Reset animasi attack
                 }
-                random = Random.Range(0, 2); //random serangan berikutnya 0 atau 1
+                timerFire += Time.fixedDeltaTime;
             }
 
-            timerSpawn += Time.fixedDeltaTime;
-        }
+            //SpawnRate Boss
+            if (timerSpawn >= spawnRate)
+            {
+                if (random == 0)
+                {
+                    Move1();
+                }
+                else if (random == 1)
+                {
+                    Move2();
+                }
+            }
+            else
+            {
+                if (follow.target != null)
+                {
+                    float distanceX = Mathf.Abs(transform.position.x - defaultTransform.position.x); //cari nilai mutlak untuk distanceX
+                    anim.SetBool("isAttack", false); //Reset animasi attack
+                    if (distanceX < 0.1) //kalau sudah sangat dekat(sampai) dengan defaultTransform, reset ke posisi awal
+                    {
+                        rb.linearVelocity = Vector2.zero; //hentikan pergerakan rigidbody2D
+                        transform.position = defaultPosition; //Memastikan bos di posisi default
+                        follow.target = null;
+                    }
+                    random = Random.Range(0, 2); //random serangan berikutnya 0 atau 1
+                }
 
-        if (currentHealth > health.health)
-        {
-            anim.SetBool("isHit", true);
-            currentHealth = health.health;
-        }
-        else
-        {
-            anim.SetBool("isHit", false);
+                timerSpawn += Time.fixedDeltaTime;
+            }
+
+            if (currentHealth > health.health)
+            {
+                anim.SetBool("isHit", true);
+                currentHealth = health.health;
+            }
+            else
+            {
+                anim.SetBool("isHit", false);
+            }
         }
     }
 

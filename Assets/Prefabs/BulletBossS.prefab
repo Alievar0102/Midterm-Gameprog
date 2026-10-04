@@ -215,3 +215,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   health: 1
   isPlayer: 0
+  isBullet: 1
