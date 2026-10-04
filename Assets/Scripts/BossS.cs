@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BossS : MonoBehaviour
 {
+    Logic logic;
     Rigidbody2D rb;
     Follow follow;
 
@@ -37,6 +38,8 @@ public class BossS : MonoBehaviour
 
     void Start()
     {
+        logic = FindFirstObjectByType<Logic>();
+
         fireRate = rateOfFire;
 
         rb = GetComponent<Rigidbody2D>();
@@ -96,7 +99,8 @@ public class BossS : MonoBehaviour
             if (timerFire >= fireRate)
             {
                 anim.SetBool("isAttack", true); //set animasi attack
-                Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
+                GameObject bossBullet = Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
+                bossBullet.transform.SetParent(logic.spawnObjectContainer.transform);
                 timerFire = 0f;
             }
             else
@@ -169,9 +173,12 @@ public class BossS : MonoBehaviour
             anim.SetBool("isAttack", true); //Set animasi attack
 
             //Spawn enemy
-            Instantiate(enemyPrefab, new Vector2(gun.transform.position.x, gun.transform.position.y), Quaternion.identity);
-            Instantiate(enemyPrefab, new Vector2(gun.transform.position.x - 1.5f, gun.transform.position.y), Quaternion.identity);
-            Instantiate(enemyPrefab, new Vector2(gun.transform.position.x + 1.5f, gun.transform.position.y), Quaternion.identity);
+            GameObject enemy1 = Instantiate(enemyPrefab, new Vector2(gun.transform.position.x, gun.transform.position.y), Quaternion.identity);
+            enemy1.transform.SetParent(logic.spawnObjectContainer.transform);
+            GameObject enemy2 = Instantiate(enemyPrefab, new Vector2(gun.transform.position.x - 1.5f, gun.transform.position.y), Quaternion.identity);
+            enemy2.transform.SetParent(logic.spawnObjectContainer.transform);
+            GameObject enemy3 = Instantiate(enemyPrefab, new Vector2(gun.transform.position.x + 1.5f, gun.transform.position.y), Quaternion.identity);
+            enemy3.transform.SetParent(logic.spawnObjectContainer.transform);
 
             follow.target = defaultTransform; //Menargetkan kembali ke posisi transform awal(defaultTransform)
             timerSpawn = 0f; //reset timerSpawn

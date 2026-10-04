@@ -68,7 +68,14 @@ public class Health : MonoBehaviour
 
             SpecialEffectsHelper.Instance.Explode(transform.position, scale);
 
-            Destroy(gameObject);
+            if (isPlayer) //kalau player mati, ubah state menjadi Lose
+            {
+                GameState.Instance.Dead = true;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

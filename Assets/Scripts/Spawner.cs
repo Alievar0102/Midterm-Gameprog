@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    Logic logic;
+
     [Header("Enemy")]
     public GameObject enemy;
     public float spawnRate = 1f;
@@ -23,6 +25,7 @@ public class Spawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        logic = FindFirstObjectByType<Logic>();
         timer = spawnRate * 0.8f; // Start di 80% total spawnrate supaya spawn lebih cepat saat pertama kali play
     }
 
@@ -56,7 +59,8 @@ public class Spawner : MonoBehaviour
     void SpawnObject(GameObject @object, float x, float y, Quaternion rotation)
     {
         //spawn object dan tambah count
-        Instantiate(@object, new Vector2(x, y), rotation);
+        GameObject spawnedObject = Instantiate(@object, new Vector2(x, y), rotation);
+        spawnedObject.transform.SetParent(logic.spawnObjectContainer.transform);
         //count++;
     }
 }

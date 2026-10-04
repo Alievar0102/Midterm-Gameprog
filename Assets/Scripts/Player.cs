@@ -4,6 +4,12 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public Transform defaultPosition;
+    Health health;
+    public int startHealth = 1;
+
+    Logic logic;
+
     [Header("Move Stats")]
     float moveX;
     float lastMoveX = 0; //check move terakhir x
@@ -31,10 +37,26 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        defaultPosition = transform;
+        health = GetComponent<Health>();
+        startHealth = health.health;
+        logic = FindFirstObjectByType<Logic>();
+        
         rb = GetComponent<Rigidbody2D>();
         GameState.Instance.currentState = GameState.State.Playing;
 
         timerFire = fireRate;
+    }
+
+    private void Update()
+    {
+        if(GameState.Instance.currentState == GameState.State.Lose)
+        {
+            Debug.Log("Player Lose");
+            moveX = 0;
+            moveY = 0;
+            isHoldingFire = false;
+        }
     }
 
     // Update is called once per frame
@@ -168,7 +190,8 @@ public class Player : MonoBehaviour
         {
             if (isHoldingFire) //kalau HoldingFire true tembak
             {
-                Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
+                GameObject playerBullet = Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
+                playerBullet.transform.SetParent(logic.spawnObjectContainer.transform);
                 AudioManager.Instance.PlayShootPlayer();
                 timerFire = 0f;
             }

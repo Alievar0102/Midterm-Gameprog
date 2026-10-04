@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameState : Singleton<GameState>
 {
+    public List<GameObject> spawnedObjects = new List<GameObject>();
     private int killCount;
     private bool dead = false;
 
@@ -50,5 +52,10 @@ public class GameState : Singleton<GameState>
     public bool IsGameOver()
     {
         return currentState == State.Win || currentState == State.Lose;
+    }
+
+    public void AddListSpawn(GameObject target)
+    {
+        spawnedObjects.Add(target);
     }
 }
