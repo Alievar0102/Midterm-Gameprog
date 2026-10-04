@@ -1,18 +1,32 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
     public int health = 1;
     public bool isPlayer = false;
     public bool isBullet = false;
+
     Spawner spawner;
     Logic logic;
+
+    public Slider slider;
+
+    int maxHealth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         spawner = FindFirstObjectByType<Spawner>();
         logic = FindFirstObjectByType<Logic>();
+
+        maxHealth = health;
+
+        if (slider != null)
+        {
+            slider.maxValue = maxHealth;
+            slider.value = health;
+        }
     }
 
     // Update is called once per frame
@@ -24,6 +38,8 @@ public class Health : MonoBehaviour
     void Damage(int damage)
     {
         health -= damage;
+        UpdateHealth();
+
         if(health <= 0)
         {
             if(!isPlayer && !isBullet)
@@ -33,6 +49,11 @@ public class Health : MonoBehaviour
             }
             Destroy(gameObject);
         }
+    }
+
+    public void UpdateHealth()
+    {
+        if (slider != null) slider.value = health;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -29,6 +29,13 @@ public class GameSettings : Singleton<GameSettings>
         else Destroy(gameObject);
     }
 
+    private void Start()
+    {
+        SetVolume("VolumeMaster", volumeMaster);
+        SetVolume("VolumeMusic", volumeMusic);
+        SetVolume("VolumeSFX", volumeSFX);
+    }
+
     // Update is called once per frame
     void Update()
     {
