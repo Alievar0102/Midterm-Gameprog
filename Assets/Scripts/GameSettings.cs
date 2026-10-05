@@ -10,6 +10,8 @@ public class GameSettings : MonoBehaviour
     public AudioSource sourceMusic;
     public AudioSource sourceSFX;
 
+    public AudioClip sampleSFX;
+
     public AudioClip shootPlayer;
     public AudioClip hitPlayer;
     public AudioClip explosion;
@@ -52,27 +54,27 @@ public class GameSettings : MonoBehaviour
         
     }
 
-    public void ToggleMaster(bool isMuted)
+    public void ToggleMaster(bool isOn)
     {
-        mutedMaster = isMuted;
+        mutedMaster = !isOn;
 
-        if (isMuted) audioMixer.SetFloat("VolumeMaster", -80);
+        if (!isOn) audioMixer.SetFloat("VolumeMaster", -80);
         else SetVolume("VolumeMaster", volumeMaster);
     }
 
-    public void ToggleMusic(bool isMuted)
+    public void ToggleMusic(bool isOn)
     {
-        mutedMusic = isMuted;
+        mutedMusic = !isOn;
 
-        if (isMuted) audioMixer.SetFloat("VolumeMusic", -80);
+        if (!isOn) audioMixer.SetFloat("VolumeMusic", -80);
         else SetVolume("VolumeMusic", volumeMusic);
     }
 
-    public void ToggleSFX(bool isMuted)
+    public void ToggleSFX(bool isOn)
     {
-        mutedSFX = isMuted;
+        mutedSFX = !isOn;
 
-        if (isMuted) audioMixer.SetFloat("VolumeSFX", -80);
+        if (!isOn) audioMixer.SetFloat("VolumeSFX", -80);
         else SetVolume("VolumeSFX", volumeSFX);
     }
 
@@ -118,17 +120,24 @@ public class GameSettings : MonoBehaviour
         sourceSFX.PlayOneShot(clip, volume);
     }
 
-    public void ChangeMusic(AudioClip clip)
+    public void PlaySampleSFX()
+    {
+        PlaySFX(sampleSFX);
+    }
+
+    public void PlayMusic(AudioClip clip)
     {
         if (sourceMusic == null || clip == null)
         {
             Debug.LogWarning("Audio clip is null!");
             return;
         }
+
         if (sourceMusic.clip == clip && sourceMusic.isPlaying)
         {
             return; // Already playing the same clip
         }
+
         sourceMusic.Stop();
         sourceMusic.clip = clip;
         sourceMusic.volume = 1f;
@@ -138,12 +147,12 @@ public class GameSettings : MonoBehaviour
 
     public void PlayCombatMusic()
     {
-        ChangeMusic(combatMusic);
+        PlayMusic(combatMusic);
     }
 
     public void PlayBossMusic()
     {
-        ChangeMusic(bossMusic);
+        PlayMusic(bossMusic);
     }
     
     public void PlayShootPlayer()

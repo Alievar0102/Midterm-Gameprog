@@ -4,6 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class UIMainMenu : MonoBehaviour
 {
+    public AudioClip musicMainMenu;
+
+    private void Awake()
+    {
+        GameSettings.Instance.PlayMusic(musicMainMenu);
+    }
+
     public void LoadLevel(string levelName)
     {
         GameState.Instance.LevelStart();
