@@ -252,14 +252,12 @@ public class Player : MonoBehaviour
         {
             case (GameState.State.Playing):
                 {
-                    GameState.Instance.currentState = GameState.State.Paused;
-                    Time.timeScale = 0;
+                    GameState.Instance.GamePause();
                     break;
                 }
             case (GameState.State.Paused):
                 {
-                    GameState.Instance.currentState = GameState.State.Playing;
-                    Time.timeScale = 1;
+                    GameState.Instance.GameResume();
                     break;
                 }
         }

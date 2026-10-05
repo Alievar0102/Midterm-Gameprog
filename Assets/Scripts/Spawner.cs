@@ -32,6 +32,8 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameState.Instance.IsPlaying()) return;
+
         //Spawn Rate Object
         if (timer >= spawnRate)
         {

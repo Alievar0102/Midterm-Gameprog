@@ -5,6 +5,7 @@ public class Health : MonoBehaviour
 {
     public int health = 1;
     public bool isPlayer = false;
+    public bool isBoss = false;
     public bool isBullet = false;
 
     Spawner spawner;
@@ -70,7 +71,11 @@ public class Health : MonoBehaviour
 
             if (isPlayer) //kalau player mati, ubah state menjadi Lose
             {
-                GameState.Instance.Dead = true;
+                GameState.Instance.GameLose();
+            }
+            else if (isBoss)
+            {
+                GameState.Instance.GameWin();
             }
             else
             {

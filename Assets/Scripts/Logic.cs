@@ -10,17 +10,33 @@ public class Logic : MonoBehaviour
     public GameObject spawnObjectContainer;
     public GameObject gameOverPanel;
     public GameObject pausePanel;
+    public GameObject winPanel;
+    public TextMeshProUGUI textWin;
 
     private void Start()
     {
         spawnObjectContainer = new GameObject("SpawnedObjectsContainer");
         player = FindFirstObjectByType<Player>();
+
+        SpecialEffectsHelper.Instance.spawnObjectContainer = spawnObjectContainer;
     }
 
     private void Update()
     {
         gameOverPanel.SetActive(value: GameState.Instance.currentState == GameState.State.Lose);
         pausePanel.SetActive(value: GameState.Instance.currentState == GameState.State.Paused);
+        winPanel.SetActive(value: GameState.Instance.currentState == GameState.State.Win);
+
+        if (winPanel.activeInHierarchy)
+        {
+            if (GameState.Instance.HasNextLevel()) textWin.SetText("click anywhere to continue to the next level");
+            else textWin.SetText("click anywhere to return to the main menu");
+        }
+    }
+
+    public void ContinueGame()
+    {
+        GameState.Instance.GameContinue();
     }
 
     public void RestartGame()
@@ -38,8 +54,7 @@ public class Logic : MonoBehaviour
         GameState.Instance.KillCount = 0;
         killCountText.text = GameState.Instance.KillCount.ToString();
 
-        GameState.Instance.Dead = false;
-        GameState.Instance.currentState = GameState.State.Playing;
+        GameState.Instance.GameResume();
     }
 
     public void DestroyWhenTriggerDeadZone(GameObject target, Collider2D trigger)

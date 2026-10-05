@@ -6,7 +6,8 @@ public class UIMainMenu : MonoBehaviour
 {
     public void LoadLevel(string levelName)
     {
-        SceneManager.LoadScene(levelName);
+        GameState.Instance.LevelStart();
+        //SceneManager.LoadScene(levelName);
     }
 
     public void LoadLevel(int levelNum)

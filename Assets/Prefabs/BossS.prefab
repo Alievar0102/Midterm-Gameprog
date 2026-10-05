@@ -616,6 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   health: 50
   isPlayer: 0
+  isBoss: 1
   isBullet: 0
   mobSize: {fileID: 6547255647239240442, guid: 4b4e7b53f131ed04885fb65590ff7b33, type: 3}
   slider: {fileID: 4238948233297330474}

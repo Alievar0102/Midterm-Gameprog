@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class SpecialEffectsHelper : MonoBehaviour
 {
-    Logic logic;
     public static SpecialEffectsHelper Instance;
 
     public ParticleSystem fireEffect;
 
+    public GameObject spawnObjectContainer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        logic = GetComponent<Logic>();
-
         if (Instance == null)
         {
             Instance = this;
@@ -30,7 +29,7 @@ public class SpecialEffectsHelper : MonoBehaviour
     {
         ParticleSystem newParticleSystem = Instantiate(prefab, position, Quaternion.identity) as ParticleSystem;
         newParticleSystem.transform.localScale = Vector3.one * scale;
-        newParticleSystem.transform.SetParent(logic.spawnObjectContainer.transform);
+        newParticleSystem.transform.SetParent(spawnObjectContainer.transform);
 
         return newParticleSystem;
     }
