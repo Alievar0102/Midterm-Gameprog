@@ -64,14 +64,17 @@ public class Health : MonoBehaviour
 
             float scale = 0;
 
-            if (spriteRenderer == null)
+            if (!isBullet)
             {
-                Bounds bounds = spriteRenderers[0].bounds;
+                if (spriteRenderer == null)
+                {
+                    Bounds bounds = spriteRenderers[0].bounds;
 
-                for (int i = 1; i < spriteRenderers.Length; i++) bounds.Encapsulate(spriteRenderers[i].bounds);
+                    for (int i = 1; i < spriteRenderers.Length; i++) bounds.Encapsulate(spriteRenderers[i].bounds);
 
-                scale = bounds.size.x / mobSize.bounds.size.x;
-            } else if (!isBullet) scale = spriteRenderer.bounds.size.x / mobSize.bounds.size.x;
+                    scale = bounds.size.x / mobSize.bounds.size.x;
+                } else scale = spriteRenderer.bounds.size.x / mobSize.bounds.size.x;
+            }
 
             SpecialEffectsHelper.Instance.Explode(transform.position, scale);
 
