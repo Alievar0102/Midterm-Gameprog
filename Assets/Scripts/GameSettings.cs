@@ -123,7 +123,7 @@ public class GameSettings : MonoBehaviour
 
     public void PlaySampleSFX()
     {
-        PlaySFX(sampleSFX);
+        PlayShootPlayer();
     }
 
     public void PlayMusic(AudioClip clip)

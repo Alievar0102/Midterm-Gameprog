@@ -6,7 +6,6 @@ public class GameState : Singleton<GameState>
 {
     public List<GameObject> spawnedObjects = new List<GameObject>();
     private int killCount;
-    private bool dead = false;
 
     public int KillCount
     {
