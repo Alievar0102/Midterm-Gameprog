@@ -1,24 +1,26 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class GameSettings : MonoBehaviour
+public class GameSettings : Singleton<GameSettings>
 {
-    public static GameSettings Instance;
+    //public static GameSettings Instance;
 
-    public AudioMixer audioMixer;
+    //public AudioMixer audioMixer;
+
+    AudioManager audioManager;
 
     public AudioSource sourceMusic;
     public AudioSource sourceSFX;
 
     public AudioClip sampleSFX;
 
-    public AudioClip shootPlayer;
-    public AudioClip hitPlayer;
-    public AudioClip explosion;
-    public AudioClip mobDie;
-    public AudioClip mainMenuMusic;
-    public AudioClip combatMusic;
-    public AudioClip bossMusic;
+    //public AudioClip shootPlayer;
+    //public AudioClip hitPlayer;
+    //public AudioClip explosion;
+    //public AudioClip mobDie;
+    //public AudioClip mainMenuMusic;
+    //public AudioClip combatMusic;
+    //public AudioClip bossMusic;
 
     private float volumeMaster = 100;
     private float volumeMusic = 100;
@@ -32,12 +34,20 @@ public class GameSettings : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else Destroy(gameObject);
+        //if (Instance == null)
+        //{
+        //    Instance = this;
+        //    DontDestroyOnLoad(gameObject);
+        //}
+        //else Destroy(gameObject);
+
+        audioManager = FindFirstObjectByType<AudioManager>();
+
+        sourceMusic = gameObject.AddComponent<AudioSource>();
+        sourceSFX = gameObject.AddComponent<AudioSource>();
+
+        sourceMusic.outputAudioMixerGroup = audioManager.groupMusic;
+        sourceSFX.outputAudioMixerGroup= audioManager.groupSFX;
 
         volumeMaster = PlayerPrefs.GetFloat("VolumeMaster", 100);
         volumeMusic = PlayerPrefs.GetFloat("VolumeMusic", 100);
@@ -54,7 +64,7 @@ public class GameSettings : MonoBehaviour
     {
         mutedMaster = !isOn;
 
-        if (!isOn) audioMixer.SetFloat("VolumeMaster", -80);
+        if (!isOn) audioManager.audioMixer.SetFloat("VolumeMaster", -80);
         else SetVolume("VolumeMaster", volumeMaster);
     }
 
@@ -62,7 +72,7 @@ public class GameSettings : MonoBehaviour
     {
         mutedMusic = !isOn;
 
-        if (!isOn) audioMixer.SetFloat("VolumeMusic", -80);
+        if (!isOn) audioManager.audioMixer.SetFloat("VolumeMusic", -80);
         else SetVolume("VolumeMusic", volumeMusic);
     }
 
@@ -70,7 +80,7 @@ public class GameSettings : MonoBehaviour
     {
         mutedSFX = !isOn;
 
-        if (!isOn) audioMixer.SetFloat("VolumeSFX", -80);
+        if (!isOn) audioManager.audioMixer.SetFloat("VolumeSFX", -80);
         else SetVolume("VolumeSFX", volumeSFX);
     }
 
@@ -102,8 +112,8 @@ public class GameSettings : MonoBehaviour
     {
         volume /= 100;
 
-        if (volume == 0) audioMixer.SetFloat(objectName, -80);
-        else audioMixer.SetFloat(objectName, Mathf.Log10(volume) * 20);
+        if (volume == 0) audioManager.audioMixer.SetFloat(objectName, -80);
+        else audioManager.audioMixer.SetFloat(objectName, Mathf.Log10(volume) * 20);
     }
 
     public void PlaySFX(AudioClip clip, float volume = 1f)
@@ -116,10 +126,10 @@ public class GameSettings : MonoBehaviour
         sourceSFX.PlayOneShot(clip, volume);
     }
 
-    public void PlaySampleSFX()
-    {
-        PlayShootPlayer();
-    }
+    //public void PlaySampleSFX(AudioClip clipSFX)
+    //{
+    //    PlaySFX(clipSFX);
+    //}
 
     public void PlayMusic(AudioClip clip)
     {
@@ -143,37 +153,37 @@ public class GameSettings : MonoBehaviour
         sourceMusic.Play();
     }
 
-    public void PlayMainMenuMusic()
+    public void PlayMainMenuMusic(AudioClip mainMenuMusic)
     {
         PlayMusic(mainMenuMusic);
     }
 
-    public void PlayCombatMusic()
+    public void PlayCombatMusic(AudioClip combatMusic)
     {
         PlayMusic(combatMusic);
     }
 
-    public void PlayBossMusic()
+    public void PlayBossMusic(AudioClip bossMusic)
     {
         PlayMusic(bossMusic);
     }
     
-    public void PlayShootPlayer()
+    public void PlayShootPlayer(AudioClip shootPlayer)
     {
         PlaySFX(shootPlayer, 1f);
     }
 
-    public void PlayHitPlayer()
+    public void PlayHitPlayer(AudioClip hitPlayer)
     {
-        PlaySFX(hitPlayer, 2f);
+        PlaySFX(hitPlayer, 3f);
     }
 
-    public void PlayExplosion()
+    public void PlayExplosion(AudioClip explosion)
     {
         PlaySFX(explosion, 0.8f);
     }
     
-    public void PlayMobDie()
+    public void PlayMobDie(AudioClip mobDie)
     {
         PlaySFX(mobDie, 0.2f);
     }

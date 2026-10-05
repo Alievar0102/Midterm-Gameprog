@@ -11,6 +11,8 @@ public class Health : MonoBehaviour
     Spawner spawner;
     Logic logic;
 
+    AudioManager audioManager;
+
     LevelDifficulty levelDifficulty;
 
     SpriteRenderer spriteRenderer;
@@ -27,6 +29,7 @@ public class Health : MonoBehaviour
         spawner = FindFirstObjectByType<Spawner>();
         logic = FindFirstObjectByType<Logic>();
         levelDifficulty = FindFirstObjectByType<LevelDifficulty>();
+        audioManager = FindFirstObjectByType<AudioManager>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null) spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
@@ -51,7 +54,7 @@ public class Health : MonoBehaviour
 
     public void Damage(int damage)
     {
-        if (isPlayer) GameSettings.Instance.PlayHitPlayer();
+        if (isPlayer) GameSettings.Instance.PlayHitPlayer(audioManager.hitPlayer);
 
         health -= damage;
         UpdateHealth();
@@ -87,12 +90,12 @@ public class Health : MonoBehaviour
             }
             else if (isBoss)
             {
-                GameSettings.Instance.PlayExplosion();
+                GameSettings.Instance.PlayExplosion(audioManager.explosion);
                 GameState.Instance.GameWin();
             }
             else
             {
-                if (!isBullet) GameSettings.Instance.PlayMobDie();
+                if (!isBullet) GameSettings.Instance.PlayMobDie(audioManager.mobDie);
                 Destroy(gameObject);
             }
         }

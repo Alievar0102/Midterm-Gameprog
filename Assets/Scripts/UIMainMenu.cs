@@ -4,9 +4,15 @@ using UnityEngine.SceneManagement;
 
 public class UIMainMenu : MonoBehaviour
 {
+    AudioManager audioManager;
+
     private void Start()
     {
-        GameSettings.Instance.PlayMainMenuMusic();
+        GameState.Instance.currentState = GameState.State.MainMenu;
+
+        audioManager = FindFirstObjectByType<AudioManager>();
+
+        GameSettings.Instance.PlayMainMenuMusic(audioManager.mainMenuMusic);
     }
 
     public void LoadLevel(string levelName)

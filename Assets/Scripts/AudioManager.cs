@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
-public class AudioManager : Singleton<AudioManager>
+public class AudioManager : MonoBehaviour
 {
-    public AudioSource musicSource;
-    public AudioSource sfxSource;
+    public AudioMixer audioMixer;
+
+    public AudioMixerGroup groupMusic;
+    public AudioMixerGroup groupSFX;
 
     public AudioClip shootPlayer;
     public AudioClip hitPlayer;
@@ -11,6 +14,8 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip mobDie;
     public AudioClip combatMusic;
     public AudioClip bossMusic;
+    public AudioClip mainMenuMusic;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,58 +28,63 @@ public class AudioManager : Singleton<AudioManager>
 
     }
 
-    public void PlayMusic(AudioClip clip, float volume)
+    public void PlaySampleSFX()
     {
-        if (musicSource == null || clip == null)
-        {
-            Debug.LogWarning("Audio clip is null!");
-            return;
-        }
-        if (musicSource.clip == clip && musicSource.isPlaying)
-        {
-            return; // Already playing the same clip
-        }
-        musicSource.clip = clip;
-        musicSource.volume = volume;
-        musicSource.loop = true;
-        musicSource.Play();
+        GameSettings.Instance.PlayShootPlayer(shootPlayer);
     }
 
-    public void PlaySFX(AudioClip clip, float volume)
-    {
-        if (sfxSource == null || clip == null)
-        {
-            Debug.LogWarning("Audio clip is null!");
-            return;
-        }
-        sfxSource.PlayOneShot(clip, 1f);
-    }
+    //public void PlayMusic(AudioClip clip, float volume)
+    //{
+    //    if (musicSource == null || clip == null)
+    //    {
+    //        Debug.LogWarning("Audio clip is null!");
+    //        return;
+    //    }
+    //    if (musicSource.clip == clip && musicSource.isPlaying)
+    //    {
+    //        return; // Already playing the same clip
+    //    }
+    //    musicSource.clip = clip;
+    //    musicSource.volume = volume;
+    //    musicSource.loop = true;
+    //    musicSource.Play();
+    //}
 
-    public void PlayShootPlayer()
-    {
-        sfxSource.PlayOneShot(shootPlayer, 0.5f);
-    }
-    public void PlayHitPlayer()
-    {
-        sfxSource.PlayOneShot(hitPlayer, 1f);
-    }
-    public void PlayExplosion()
-    {
-        sfxSource.PlayOneShot(explosion, 0.8f);
-    }
+    //public void PlaySFX(AudioClip clip, float volume)
+    //{
+    //    if (sfxSource == null || clip == null)
+    //    {
+    //        Debug.LogWarning("Audio clip is null!");
+    //        return;
+    //    }
+    //    sfxSource.PlayOneShot(clip, 1f);
+    //}
 
-    public void PlayMobDie()
-    {
-        sfxSource.PlayOneShot(mobDie, 0.8f);
-    }
+    //public void PlayShootPlayer()
+    //{
+    //    sfxSource.PlayOneShot(shootPlayer, 0.5f);
+    //}
+    //public void PlayHitPlayer()
+    //{
+    //    sfxSource.PlayOneShot(hitPlayer, 1f);
+    //}
+    //public void PlayExplosion()
+    //{
+    //    sfxSource.PlayOneShot(explosion, 0.8f);
+    //}
 
-    public void PlayCombatMusic()
-    {
-        PlayMusic(combatMusic, 0.5f);
-    }
+    //public void PlayMobDie()
+    //{
+    //    sfxSource.PlayOneShot(mobDie, 0.8f);
+    //}
 
-    public void PlayBossMusic()
-    {
-        PlayMusic(bossMusic, 0.5f);
-    }
+    //public void PlayCombatMusic()
+    //{
+    //    PlayMusic(combatMusic, 0.5f);
+    //}
+
+    //public void PlayBossMusic()
+    //{
+    //    PlayMusic(bossMusic, 0.5f);
+    //}
 }

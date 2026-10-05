@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 
     Logic logic;
 
+    AudioManager audioManager;
+
     [Header("Move Stats")]
     float moveX;
     float lastMoveX = 0; //check move terakhir x
@@ -38,9 +40,12 @@ public class Player : MonoBehaviour
     void Start()
     {
         defaultPosition = transform;
+
         health = GetComponent<Health>();
         startHealth = health.health;
+
         logic = FindFirstObjectByType<Logic>();
+        audioManager = FindFirstObjectByType<AudioManager>();
         
         rb = GetComponent<Rigidbody2D>();
         GameState.Instance.currentState = GameState.State.Playing;
@@ -192,7 +197,7 @@ public class Player : MonoBehaviour
             {
                 GameObject playerBullet = Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
                 playerBullet.transform.SetParent(logic.spawnObjectContainer.transform);
-                GameSettings.Instance.PlayShootPlayer();
+                GameSettings.Instance.PlayShootPlayer(audioManager.shootPlayer);
                 timerFire = 0f;
             }
             else

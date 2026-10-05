@@ -7,6 +7,8 @@ public class GameState : Singleton<GameState>
     public List<GameObject> spawnedObjects = new List<GameObject>();
     private int killCount;
 
+    AudioManager audioManager;
+
     public int KillCount
     {
         get
@@ -62,11 +64,13 @@ public class GameState : Singleton<GameState>
 
     public void LevelStart()
     {
+        audioManager = FindFirstObjectByType<AudioManager>();
+
         GameState.Instance.KillCount = 0;
         GameState.Instance.currentState = GameState.State.Playing;
         Time.timeScale = 1;
 
-        GameSettings.Instance.PlayCombatMusic();
+        GameSettings.Instance.PlayCombatMusic(audioManager.combatMusic);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -78,7 +82,9 @@ public class GameState : Singleton<GameState>
 
     public void GameResume() // after game over, restart
     {
-        GameSettings.Instance.PlayCombatMusic();
+        audioManager = FindFirstObjectByType<AudioManager>();
+
+        GameSettings.Instance.PlayCombatMusic(audioManager.combatMusic);
         GameState.Instance.currentState = GameState.State.Playing;
         Time.timeScale = 1;
     }

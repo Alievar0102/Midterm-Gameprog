@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &686135422877163199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 834920483396101428}
+  - component: {fileID: 2882569605808148561}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &834920483396101428
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686135422877163199}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.15694, y: 144.32068, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2882569605808148561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686135422877163199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee0fd80db836074c9df4479fac801db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  audioMixer: {fileID: 24100000, guid: 0448e54504631bd48b4c16cd310df99c, type: 2}
+  groupMusic: {fileID: 5864188774965868639, guid: 0448e54504631bd48b4c16cd310df99c, type: 2}
+  groupSFX: {fileID: -1701874057558298811, guid: 0448e54504631bd48b4c16cd310df99c, type: 2}
+  shootPlayer: {fileID: 8300000, guid: 2acd7125da8272f4cb4b6d01947ceffe, type: 3}
+  hitPlayer: {fileID: 8300000, guid: 6c5eee00949b207459a0c95ba9cbf779, type: 3}
+  explosion: {fileID: 8300000, guid: ccc6eb06a5a5ea7499cf937a4adaf29f, type: 3}
+  mobDie: {fileID: 8300000, guid: 4abd898f0cba24f4c8e7783a83820756, type: 3}
+  combatMusic: {fileID: 8300000, guid: 69d3fbff98053f049ada5601c3c54c25, type: 3}
+  bossMusic: {fileID: 8300000, guid: 1e9b3f5140e596e4cb80f261a8d3ff9f, type: 3}
+  mainMenuMusic: {fileID: 8300000, guid: f1d8426473b1f614ca1f6ba08b0d6ad2, type: 3}

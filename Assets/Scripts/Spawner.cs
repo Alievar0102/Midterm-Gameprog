@@ -6,6 +6,8 @@ public class Spawner : MonoBehaviour
 {
     Logic logic;
 
+    AudioManager audioManager;
+
     [Header("Enemy")]
     public GameObject enemy;
     public float spawnRate = 1f;
@@ -26,6 +28,8 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         logic = FindFirstObjectByType<Logic>();
+        audioManager = FindFirstObjectByType<AudioManager>();
+
         timer = spawnRate * 0.8f; // Start di 80% total spawnrate supaya spawn lebih cepat saat pertama kali play
     }
 
@@ -56,7 +60,7 @@ public class Spawner : MonoBehaviour
         //Spawn Boss
         if (GameState.Instance.KillCount >= KillCountToSpawnBoss && !bossSpawned)
         {
-            GameSettings.Instance.PlayBossMusic();
+            GameSettings.Instance.PlayBossMusic(audioManager.bossMusic);
             SpawnObject(boss, 0, transform.position.y, Quaternion.identity);
             bossSpawned = true; //agar boss hanya spawn sekali
         }
