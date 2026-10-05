@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
             {
                 GameObject playerBullet = Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
                 playerBullet.transform.SetParent(logic.spawnObjectContainer.transform);
-                AudioManager.Instance.PlayShootPlayer();
+                GameSettings.Instance.PlayShootPlayer();
                 timerFire = 0f;
             }
             else

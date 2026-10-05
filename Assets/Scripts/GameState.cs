@@ -63,9 +63,11 @@ public class GameState : Singleton<GameState>
 
     public void LevelStart()
     {
+        GameState.Instance.KillCount = 0;
         GameState.Instance.currentState = GameState.State.Playing;
         Time.timeScale = 1;
 
+        GameSettings.Instance.PlayCombatMusic();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

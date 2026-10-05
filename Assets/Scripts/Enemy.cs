@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
         {
             GameObject enemyBullet = Instantiate(bulletPrefab, gun.transform.position, Quaternion.identity);
             enemyBullet.transform.SetParent(logic.spawnObjectContainer.transform);
-            //Music place TODO: AudioManager.Instance.PlayShootEnemy();
+            //Music place TODO: GameSettings.Instance.PlayShootEnemy();
             timer = 0f;
         }
         else

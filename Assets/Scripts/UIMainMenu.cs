@@ -8,7 +8,7 @@ public class UIMainMenu : MonoBehaviour
 
     private void Awake()
     {
-        GameSettings.Instance.PlayMusic(musicMainMenu);
+        GameSettings.Instance.PlayMainMenuMusic();
     }
 
     public void LoadLevel(string levelName)

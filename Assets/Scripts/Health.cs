@@ -51,12 +51,14 @@ public class Health : MonoBehaviour
 
     void Damage(int damage)
     {
+        if (isPlayer) GameSettings.Instance.PlayHitPlayer();
+
         health -= damage;
         UpdateHealth();
 
-        if(health <= 0)
+        if (health <= 0)
         {
-            if(!isPlayer && !isBullet)
+            if (!isPlayer && !isBullet)
             {
                 Debug.Log(gameObject.name + " has been destroyed.");
                 logic.UpdateKillCount();
@@ -73,7 +75,8 @@ public class Health : MonoBehaviour
                     for (int i = 1; i < spriteRenderers.Length; i++) bounds.Encapsulate(spriteRenderers[i].bounds);
 
                     scale = bounds.size.x / mobSize.bounds.size.x;
-                } else scale = spriteRenderer.bounds.size.x / mobSize.bounds.size.x;
+                }
+                else scale = spriteRenderer.bounds.size.x / mobSize.bounds.size.x;
             }
 
             SpecialEffectsHelper.Instance.Explode(transform.position, scale);
@@ -84,10 +87,12 @@ public class Health : MonoBehaviour
             }
             else if (isBoss)
             {
+                GameSettings.Instance.PlayExplosion();
                 GameState.Instance.GameWin();
             }
             else
             {
+                if (!isBullet) GameSettings.Instance.PlayMobDie();
                 Destroy(gameObject);
             }
         }

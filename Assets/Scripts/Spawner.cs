@@ -53,6 +53,7 @@ public class Spawner : MonoBehaviour
         //Spawn Boss
         if (GameState.Instance.KillCount >= KillCountToSpawnBoss && !bossSpawned)
         {
+            GameSettings.Instance.PlayBossMusic();
             SpawnObject(boss, 0, transform.position.y, Quaternion.identity);
             bossSpawned = true; //agar boss hanya spawn sekali
         }

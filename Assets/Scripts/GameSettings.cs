@@ -16,6 +16,7 @@ public class GameSettings : MonoBehaviour
     public AudioClip hitPlayer;
     public AudioClip explosion;
     public AudioClip mobDie;
+    public AudioClip mainMenuMusic;
     public AudioClip combatMusic;
     public AudioClip bossMusic;
 
@@ -140,9 +141,14 @@ public class GameSettings : MonoBehaviour
 
         sourceMusic.Stop();
         sourceMusic.clip = clip;
-        sourceMusic.volume = 1f;
+        sourceMusic.volume = 0.5f;
         sourceMusic.loop = true;
         sourceMusic.Play();
+    }
+
+    public void PlayMainMenuMusic()
+    {
+        PlayMusic(mainMenuMusic);
     }
 
     public void PlayCombatMusic()
@@ -157,7 +163,7 @@ public class GameSettings : MonoBehaviour
     
     public void PlayShootPlayer()
     {
-        PlaySFX(shootPlayer, 0.5f);
+        PlaySFX(shootPlayer, 2f);
     }
 
     public void PlayHitPlayer()
