@@ -3578,9 +3578,9 @@ MonoBehaviour:
   shootPlayer: {fileID: 8300000, guid: 2acd7125da8272f4cb4b6d01947ceffe, type: 3}
   hitPlayer: {fileID: 8300000, guid: 6c5eee00949b207459a0c95ba9cbf779, type: 3}
   explosion: {fileID: 8300000, guid: ccc6eb06a5a5ea7499cf937a4adaf29f, type: 3}
-  mobDie: {fileID: 0}
-  combatMusic: {fileID: 0}
-  bossMusic: {fileID: 0}
+  mobDie: {fileID: 8300000, guid: 4abd898f0cba24f4c8e7783a83820756, type: 3}
+  combatMusic: {fileID: 8300000, guid: 69d3fbff98053f049ada5601c3c54c25, type: 3}
+  bossMusic: {fileID: 8300000, guid: 1e9b3f5140e596e4cb80f261a8d3ff9f, type: 3}
 --- !u!1 &1953829694
 GameObject:
   m_ObjectHideFlags: 0
