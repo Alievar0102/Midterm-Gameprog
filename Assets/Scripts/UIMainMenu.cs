@@ -33,15 +33,18 @@ public class UIMainMenu : MonoBehaviour
     public void ChangeMasterVolume(float volume)
     {
         txtMaster.text = volume.ToString() + "%";
+        GameSettings.Instance.ChangeMasterVolume(volume);
     }
 
     public void ChangeMusicVolume(float volume)
     {
         txtMusic.text = volume.ToString() + "%";
+        GameSettings.Instance.ChangeMusicVolume(volume);
     }
 
     public void ChangeSFXVolume(float volume)
     {
         txtSFX.text = volume.ToString() + "%";
+        GameSettings.Instance.ChangeSFXVolume(volume);
     }
 }

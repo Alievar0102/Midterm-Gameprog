@@ -64,13 +64,10 @@ public class GameState : Singleton<GameState>
 
     public void LevelStart()
     {
-        audioManager = FindFirstObjectByType<AudioManager>();
-
         GameState.Instance.KillCount = 0;
         GameState.Instance.currentState = GameState.State.Playing;
         Time.timeScale = 1;
 
-        GameSettings.Instance.PlayCombatMusic(audioManager.combatMusic);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

@@ -7,6 +7,8 @@ public class Logic : MonoBehaviour
 {
     Player player;
 
+    AudioManager audioManager;
+
     public GameObject spawnObjectContainer;
     public GameObject gameOverPanel;
     public GameObject pausePanel;
@@ -15,6 +17,9 @@ public class Logic : MonoBehaviour
 
     private void Start()
     {
+        audioManager = FindFirstObjectByType<AudioManager>();
+        GameSettings.Instance.PlayCombatMusic(audioManager.combatMusic);
+
         spawnObjectContainer = new GameObject("SpawnedObjectsContainer");
         player = FindFirstObjectByType<Player>();
 
