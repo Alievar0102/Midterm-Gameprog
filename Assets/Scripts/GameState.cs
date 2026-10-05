@@ -76,8 +76,9 @@ public class GameState : Singleton<GameState>
         Time.timeScale = 0;
     }
 
-    public void GameResume()
+    public void GameResume() // after game over, restart
     {
+        GameSettings.Instance.PlayCombatMusic();
         GameState.Instance.currentState = GameState.State.Playing;
         Time.timeScale = 1;
     }

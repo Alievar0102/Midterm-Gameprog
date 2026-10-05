@@ -32,6 +32,9 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameState.Instance.currentState == GameState.State.Lose || GameState.Instance.currentState == GameState.State.Win)
+            bossSpawned = false;
+
         if (!GameState.Instance.IsPlaying()) return;
 
         //Spawn Rate Object

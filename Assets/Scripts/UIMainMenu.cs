@@ -4,16 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class UIMainMenu : MonoBehaviour
 {
-    public AudioClip musicMainMenu;
-
-    private void Awake()
-    {
-        GameSettings.Instance.PlayMainMenuMusic();
-    }
-
     private void Start()
     {
-        GameSettings.Instance.StartVolume();
+        GameSettings.Instance.PlayMainMenuMusic();
     }
 
     public void LoadLevel(string levelName)

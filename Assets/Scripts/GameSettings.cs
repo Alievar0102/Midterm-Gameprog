@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class GameSettings : Singleton<GameSettings>
+public class GameSettings : MonoBehaviour
 {
-    //public static GameSettings Instance;
+    public static GameSettings Instance;
 
     public AudioMixer audioMixer;
 
@@ -28,7 +28,7 @@ public class GameSettings : Singleton<GameSettings>
     private bool mutedMusic = false;
     private bool mutedSFX = false;
 
-    /*
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -36,26 +36,12 @@ public class GameSettings : Singleton<GameSettings>
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            volumeMaster = PlayerPrefs.GetFloat("VolumeMaster", 100);
-            volumeMusic = PlayerPrefs.GetFloat("VolumeMusic", 100);
-            volumeSFX = PlayerPrefs.GetFloat("VolumeSFX", 100);
         }
         else Destroy(gameObject);
-    }
-    */
 
-    private void Awake()
-    {
         volumeMaster = PlayerPrefs.GetFloat("VolumeMaster", 100);
         volumeMusic = PlayerPrefs.GetFloat("VolumeMusic", 100);
         volumeSFX = PlayerPrefs.GetFloat("VolumeSFX", 100);
-
-        //Jika bernilai 1, akan mute
-        mutedMaster = PlayerPrefs.GetInt("MutedMaster", 0) == 1;
-        mutedMusic = PlayerPrefs.GetInt("MutedMusic", 0) == 1;
-        mutedSFX = PlayerPrefs.GetInt("MutedSFX", 0) == 1;
-
-        ApplyVolumes(); //Apply Setelah PlayerPref ditentukan
     }
 
     // Update is called once per frame
@@ -64,51 +50,9 @@ public class GameSettings : Singleton<GameSettings>
 
     }
 
-    public void ApplyVolumes()
-    {
-        if (!mutedMaster)
-        {
-            SetVolume("VolumeMaster", volumeMaster);
-        }
-        else
-        {
-            audioMixer.SetFloat("VolumeMaster", -80);
-        }
-
-        if (!mutedMusic)
-        {
-            SetVolume("VolumeMusic", volumeMusic);
-        }
-        else
-        {
-            audioMixer.SetFloat("VolumeMusic", -80);
-        }
-
-        if (!mutedSFX)
-        {
-            SetVolume("VolumeSFX", volumeSFX);
-        }
-        else
-        {
-            audioMixer.SetFloat("VolumeSFX", -80);
-        }
-    }
-
-    public void StartVolume()
-    {
-        //Set awal volume di UIMainMenu
-        SetVolume("VolumeMaster", 100);
-        SetVolume("VolumeMusic", 100);
-        SetVolume("VolumeSFX", 100);
-    }
-
     public void ToggleMaster(bool isOn)
     {
         mutedMaster = !isOn;
-
-        //simpan status Muted untuk digunakan di scene yang lain. Kalo true 1 else 0
-        PlayerPrefs.SetInt("MutedMaster", mutedMaster ? 1 : 0);
-        PlayerPrefs.Save();
 
         if (!isOn) audioMixer.SetFloat("VolumeMaster", -80);
         else SetVolume("VolumeMaster", volumeMaster);
@@ -118,10 +62,6 @@ public class GameSettings : Singleton<GameSettings>
     {
         mutedMusic = !isOn;
 
-        //simpan status Muted untuk digunakan di scene yang lain. Kalo true 1 else 0
-        PlayerPrefs.SetInt("MutedMusic", mutedMusic ? 1 : 0);
-        PlayerPrefs.Save();
-
         if (!isOn) audioMixer.SetFloat("VolumeMusic", -80);
         else SetVolume("VolumeMusic", volumeMusic);
     }
@@ -129,10 +69,6 @@ public class GameSettings : Singleton<GameSettings>
     public void ToggleSFX(bool isOn)
     {
         mutedSFX = !isOn;
-
-        //simpan status Muted untuk digunakan di scene yang lain. Kalo true 1 else 0
-        PlayerPrefs.SetInt("MutedSFX", mutedSFX ? 1 : 0);
-        PlayerPrefs.Save();
 
         if (!isOn) audioMixer.SetFloat("VolumeSFX", -80);
         else SetVolume("VolumeSFX", volumeSFX);
@@ -189,19 +125,21 @@ public class GameSettings : Singleton<GameSettings>
     {
         if (sourceMusic == null || clip == null)
         {
-            Debug.LogWarning("Audio clip is null!");
+            Debug.LogWarning("Music source or clip is null!");
             return;
         }
 
         if (sourceMusic.clip == clip && sourceMusic.isPlaying)
         {
-            return; // Already playing the same clip
+            Debug.Log("Music is already playing");
+            return;
         }
 
         sourceMusic.Stop();
         sourceMusic.clip = clip;
         sourceMusic.volume = 0.5f;
         sourceMusic.loop = true;
+
         sourceMusic.Play();
     }
 
@@ -222,12 +160,12 @@ public class GameSettings : Singleton<GameSettings>
     
     public void PlayShootPlayer()
     {
-        PlaySFX(shootPlayer, 2f);
+        PlaySFX(shootPlayer, 1f);
     }
 
     public void PlayHitPlayer()
     {
-        PlaySFX(hitPlayer, 1f);
+        PlaySFX(hitPlayer, 2f);
     }
 
     public void PlayExplosion()
@@ -237,6 +175,6 @@ public class GameSettings : Singleton<GameSettings>
     
     public void PlayMobDie()
     {
-        PlaySFX(mobDie,0.8f);
+        PlaySFX(mobDie, 0.2f);
     }
 }
