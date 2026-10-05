@@ -11,6 +11,11 @@ public class UIMainMenu : MonoBehaviour
         GameSettings.Instance.PlayMainMenuMusic();
     }
 
+    private void Start()
+    {
+        GameSettings.Instance.StartVolume();
+    }
+
     public void LoadLevel(string levelName)
     {
         GameState.Instance.LevelStart();

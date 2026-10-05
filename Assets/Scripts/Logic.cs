@@ -15,8 +15,6 @@ public class Logic : MonoBehaviour
 
     private void Start()
     {
-        GameSettings.Instance.PlayCombatMusic();
-
         spawnObjectContainer = new GameObject("SpawnedObjectsContainer");
         player = FindFirstObjectByType<Player>();
 

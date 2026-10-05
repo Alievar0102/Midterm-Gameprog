@@ -26,7 +26,7 @@ public class GameSettings : Singleton<GameSettings>
 
     private bool mutedMaster = false;
     private bool mutedMusic = false;
-    private bool mutedSFX = false; 
+    private bool mutedSFX = false;
 
     /*
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,25 +44,71 @@ public class GameSettings : Singleton<GameSettings>
     }
     */
 
-    private void Start()
+    private void Awake()
     {
-        SetVolume("VolumeMaster", volumeMaster);
-        SetVolume("VolumeMusic", volumeMusic);
-        SetVolume("VolumeSFX", volumeSFX);
         volumeMaster = PlayerPrefs.GetFloat("VolumeMaster", 100);
         volumeMusic = PlayerPrefs.GetFloat("VolumeMusic", 100);
         volumeSFX = PlayerPrefs.GetFloat("VolumeSFX", 100);
+
+        //Jika bernilai 1, akan mute
+        mutedMaster = PlayerPrefs.GetInt("MutedMaster", 0) == 1;
+        mutedMusic = PlayerPrefs.GetInt("MutedMusic", 0) == 1;
+        mutedSFX = PlayerPrefs.GetInt("MutedSFX", 0) == 1;
+
+        ApplyVolumes(); //Apply Setelah PlayerPref ditentukan
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void ApplyVolumes()
+    {
+        if (!mutedMaster)
+        {
+            SetVolume("VolumeMaster", volumeMaster);
+        }
+        else
+        {
+            audioMixer.SetFloat("VolumeMaster", -80);
+        }
+
+        if (!mutedMusic)
+        {
+            SetVolume("VolumeMusic", volumeMusic);
+        }
+        else
+        {
+            audioMixer.SetFloat("VolumeMusic", -80);
+        }
+
+        if (!mutedSFX)
+        {
+            SetVolume("VolumeSFX", volumeSFX);
+        }
+        else
+        {
+            audioMixer.SetFloat("VolumeSFX", -80);
+        }
+    }
+
+    public void StartVolume()
+    {
+        //Set awal volume di UIMainMenu
+        SetVolume("VolumeMaster", 100);
+        SetVolume("VolumeMusic", 100);
+        SetVolume("VolumeSFX", 100);
     }
 
     public void ToggleMaster(bool isOn)
     {
         mutedMaster = !isOn;
+
+        //simpan status Muted untuk digunakan di scene yang lain. Kalo true 1 else 0
+        PlayerPrefs.SetInt("MutedMaster", mutedMaster ? 1 : 0);
+        PlayerPrefs.Save();
 
         if (!isOn) audioMixer.SetFloat("VolumeMaster", -80);
         else SetVolume("VolumeMaster", volumeMaster);
@@ -72,6 +118,10 @@ public class GameSettings : Singleton<GameSettings>
     {
         mutedMusic = !isOn;
 
+        //simpan status Muted untuk digunakan di scene yang lain. Kalo true 1 else 0
+        PlayerPrefs.SetInt("MutedMusic", mutedMusic ? 1 : 0);
+        PlayerPrefs.Save();
+
         if (!isOn) audioMixer.SetFloat("VolumeMusic", -80);
         else SetVolume("VolumeMusic", volumeMusic);
     }
@@ -79,6 +129,10 @@ public class GameSettings : Singleton<GameSettings>
     public void ToggleSFX(bool isOn)
     {
         mutedSFX = !isOn;
+
+        //simpan status Muted untuk digunakan di scene yang lain. Kalo true 1 else 0
+        PlayerPrefs.SetInt("MutedSFX", mutedSFX ? 1 : 0);
+        PlayerPrefs.Save();
 
         if (!isOn) audioMixer.SetFloat("VolumeSFX", -80);
         else SetVolume("VolumeSFX", volumeSFX);

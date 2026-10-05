@@ -2923,7 +2923,7 @@ MonoBehaviour:
   enemy: {fileID: 1105968702196698972, guid: 4b4e7b53f131ed04885fb65590ff7b33, type: 3}
   spawnRate: 5
   timer: 0
-  KillCountToSpawnBoss: 8
+  KillCountToSpawnBoss: 1
   boss: {fileID: 4945927370063486209, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
 --- !u!1 &1345410687
 GameObject:
