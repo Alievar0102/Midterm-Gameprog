@@ -268,6 +268,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("BossS"))
         {
             isKnockbacked = true;
+            health.Damage(1);
             Debug.Log("Player hit by BossS");
 
             //terkena Knockback

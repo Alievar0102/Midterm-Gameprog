@@ -486,9 +486,9 @@ GameObject:
   - component: {fileID: 5215015157895624443}
   - component: {fileID: 6972810631139611661}
   - component: {fileID: 6948324708390848730}
-  - component: {fileID: 7494487863509184688}
+  - component: {fileID: 2378132014646986519}
   m_Layer: 7
-  m_Name: BossS
+  m_Name: BossC
   m_TagString: BossS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -620,7 +620,7 @@ MonoBehaviour:
   isBullet: 0
   mobSize: {fileID: 6547255647239240442, guid: 4b4e7b53f131ed04885fb65590ff7b33, type: 3}
   slider: {fileID: 4238948233297330474}
---- !u!114 &7494487863509184688
+--- !u!114 &2378132014646986519
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -629,9 +629,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4945927370063486209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b9daae0aecafed4092b20b34943309b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3db55dc22304614449980bfef24ca3dc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::BossC
   defaultPosition: {x: 0, y: 2.54}
   random: 0
   bulletPrefab: {fileID: 3266298608603798659, guid: 2632937929c709a45bf242cfd1bccd10, type: 3}
@@ -641,6 +641,8 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1105968702196698972, guid: 4b4e7b53f131ed04885fb65590ff7b33, type: 3}
   spawnRate: 7
   timerSpawn: 0
+  chargeDuration: 0.6
+  chargeSpeed: 10
 --- !u!1 &5972186354708041513
 GameObject:
   m_ObjectHideFlags: 0

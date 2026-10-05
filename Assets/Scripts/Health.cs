@@ -49,7 +49,7 @@ public class Health : MonoBehaviour
 
     }
 
-    void Damage(int damage)
+    public void Damage(int damage)
     {
         if (isPlayer) GameSettings.Instance.PlayHitPlayer();
 

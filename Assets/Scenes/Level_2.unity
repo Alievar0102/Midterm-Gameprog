@@ -2924,7 +2924,7 @@ MonoBehaviour:
   spawnRate: 5
   timer: 0
   KillCountToSpawnBoss: 10
-  boss: {fileID: 4945927370063486209, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
+  boss: {fileID: 4945927370063486209, guid: f1405580350fe0045a464949bc154d1a, type: 3}
 --- !u!1 &1345410687
 GameObject:
   m_ObjectHideFlags: 0
