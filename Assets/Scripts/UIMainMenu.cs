@@ -1,14 +1,23 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIMainMenu : MonoBehaviour
 {
     AudioManager audioManager;
 
+    public Slider sliderMaster;
+    public Slider sliderMusic;
+    public Slider sliderSFX;
+
     private void Start()
     {
         GameState.Instance.currentState = GameState.State.MainMenu;
+
+        sliderMaster.value = GameSettings.Instance.GetMasterVolume();
+        sliderMusic.value = GameSettings.Instance.GetMusicVolume();
+        sliderSFX.value = GameSettings.Instance.GetSFXVolume();
 
         audioManager = FindFirstObjectByType<AudioManager>();
 

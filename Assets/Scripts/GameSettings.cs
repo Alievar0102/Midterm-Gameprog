@@ -84,6 +84,21 @@ public class GameSettings : Singleton<GameSettings>
         else SetVolume("VolumeSFX", volumeSFX);
     }
 
+    public float GetMasterVolume()
+    {
+        return volumeMaster;
+    }
+
+    public float GetMusicVolume()
+    {
+        return volumeMusic;
+    }
+
+    public float GetSFXVolume()
+    {
+        return volumeSFX;
+    }
+
     public void ChangeMasterVolume(float volume)
     {
         volumeMaster = volume;

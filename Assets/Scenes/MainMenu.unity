@@ -3739,6 +3739,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5507480382fa11849862a4ac60901e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIMainMenu
+  sliderMaster: {fileID: 1316796840}
+  sliderMusic: {fileID: 905532728}
+  sliderSFX: {fileID: 1249148227}
   txtMaster: {fileID: 992219050}
   txtMusic: {fileID: 975579263}
   txtSFX: {fileID: 1387224060}
