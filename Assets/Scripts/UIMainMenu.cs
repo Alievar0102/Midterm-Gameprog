@@ -30,6 +30,21 @@ public class UIMainMenu : MonoBehaviour
     public TextMeshProUGUI txtMusic;
     public TextMeshProUGUI txtSFX;
 
+    public void ToggleMaster(bool isOn)
+    {
+        GameSettings.Instance.ToggleMaster(isOn);
+    }
+
+    public void ToggleMusic(bool isOn)
+    {
+        GameSettings.Instance.ToggleMusic(isOn);
+    }
+
+    public void ToggleSFX(bool isOn)
+    {
+        GameSettings.Instance.ToggleSFX(isOn);
+    }
+
     public void ChangeMasterVolume(float volume)
     {
         txtMaster.text = volume.ToString() + "%";
