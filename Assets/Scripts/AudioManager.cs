@@ -40,7 +40,7 @@ public class AudioManager : Singleton<AudioManager>
         musicSource.Play();
     }
 
-    void PlaySFX(AudioClip clip, float volume)
+    public void PlaySFX(AudioClip clip, float volume)
     {
         if (sfxSource == null || clip == null)
         {
