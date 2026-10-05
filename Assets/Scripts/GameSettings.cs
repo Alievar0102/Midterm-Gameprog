@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class GameSettings : MonoBehaviour
+public class GameSettings : Singleton<GameSettings>
 {
-    public static GameSettings Instance;
+    //public static GameSettings Instance;
 
     public AudioMixer audioMixer;
 
@@ -28,6 +28,7 @@ public class GameSettings : MonoBehaviour
     private bool mutedMusic = false;
     private bool mutedSFX = false; 
 
+    /*
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -41,12 +42,16 @@ public class GameSettings : MonoBehaviour
         }
         else Destroy(gameObject);
     }
+    */
 
     private void Start()
     {
         SetVolume("VolumeMaster", volumeMaster);
         SetVolume("VolumeMusic", volumeMusic);
         SetVolume("VolumeSFX", volumeSFX);
+        volumeMaster = PlayerPrefs.GetFloat("VolumeMaster", 100);
+        volumeMusic = PlayerPrefs.GetFloat("VolumeMusic", 100);
+        volumeSFX = PlayerPrefs.GetFloat("VolumeSFX", 100);
     }
 
     // Update is called once per frame

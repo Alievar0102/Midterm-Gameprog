@@ -33,7 +33,12 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                     m_Instance = (T)FindFirstObjectByType(typeof(T));
 
                     // Create new instance if one doesn't already exist.
-                    if (m_Instance == null)
+                    if (m_Instance != null)
+                    {
+                        // Make instance persistent.
+                        DontDestroyOnLoad(m_Instance.gameObject);
+                    }
+                    else
                     {
                         // Need to create a new GameObject to attach the singleton to.
                         var singletonObject = new GameObject();
@@ -59,6 +64,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     private void OnDestroy()
     {
-        m_ShuttingDown = true;
+        if (m_Instance == this)
+        {
+            m_ShuttingDown = true;
+        }
     }
 }
