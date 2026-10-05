@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     Logic logic;
     Spawner spawner;
 
+    LevelDifficulty levelDifficulty;
+
     public float speed = 1f;
 
     [Header("Gun")]
@@ -21,7 +23,9 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         logic = FindFirstObjectByType<Logic>(); //cari di scene
         spawner = FindFirstObjectByType<Spawner>();
+        levelDifficulty = FindFirstObjectByType<LevelDifficulty>();
 
+        fireRate = (int)(fireRate * levelDifficulty.mobAttackSpeedMultiplier);
         timer = fireRate; //Enemy langsung tembak saat spawn
     }
 

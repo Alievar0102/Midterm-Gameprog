@@ -7,6 +7,8 @@ public class BossS : MonoBehaviour
     Rigidbody2D rb;
     Follow follow;
 
+    LevelDifficulty levelDifficulty;
+
     //Posisi default bos
     public Vector2 defaultPosition = new Vector2(0, 3.54f);
     Transform defaultTransform;
@@ -39,8 +41,9 @@ public class BossS : MonoBehaviour
     void Start()
     {
         logic = FindFirstObjectByType<Logic>();
+        levelDifficulty = FindFirstObjectByType<LevelDifficulty>();
 
-        fireRate = rateOfFire;
+        fireRate = rateOfFire / levelDifficulty.bossAttackSpeedMultiplier;
 
         rb = GetComponent<Rigidbody2D>();
 

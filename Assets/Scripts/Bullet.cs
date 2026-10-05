@@ -5,7 +5,7 @@ public class Bullet : MonoBehaviour
     public int damage = 1;
     public int despawnTime = 5;
     public bool isPlayer = false;
-   
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

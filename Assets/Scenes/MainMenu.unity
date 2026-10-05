@@ -2711,6 +2711,13 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 0448e54504631bd48b4c16cd310df99c, type: 2}
   sourceMusic: {fileID: 1717424151}
   sourceSFX: {fileID: 1978132597}
+  sampleSFX: {fileID: 8300000, guid: 2acd7125da8272f4cb4b6d01947ceffe, type: 3}
+  shootPlayer: {fileID: 0}
+  hitPlayer: {fileID: 0}
+  explosion: {fileID: 0}
+  mobDie: {fileID: 0}
+  combatMusic: {fileID: 0}
+  bossMusic: {fileID: 0}
 --- !u!4 &1214952495
 Transform:
   m_ObjectHideFlags: 0
@@ -2875,6 +2882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1249148226}
   - component: {fileID: 1249148227}
+  - component: {fileID: 1249148228}
   m_Layer: 5
   m_Name: sliderSFX
   m_TagString: Untagged
@@ -2980,6 +2988,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1249148228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249148225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1214952493}
+          m_TargetAssemblyTypeName: GameSettings, Assembly-CSharp
+          m_MethodName: PlaySampleSFX
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1256869372
 GameObject:
   m_ObjectHideFlags: 0
@@ -3737,6 +3774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5507480382fa11849862a4ac60901e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIMainMenu
+  musicMainMenu: {fileID: 8300000, guid: f1d8426473b1f614ca1f6ba08b0d6ad2, type: 3}
   txtMaster: {fileID: 992219050}
   txtMusic: {fileID: 975579263}
   txtSFX: {fileID: 1387224060}

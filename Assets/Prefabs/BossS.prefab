@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cdc80f6b679e6e469af85cefeb235e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  health: 50
+  health: 20
   isPlayer: 0
   isBoss: 1
   isBullet: 0

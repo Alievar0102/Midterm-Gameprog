@@ -888,7 +888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cdc80f6b679e6e469af85cefeb235e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  health: 10
+  health: 15
   isPlayer: 1
   isBoss: 0
   isBullet: 0
@@ -2923,7 +2923,7 @@ MonoBehaviour:
   enemy: {fileID: 1105968702196698972, guid: 4b4e7b53f131ed04885fb65590ff7b33, type: 3}
   spawnRate: 5
   timer: 0
-  KillCountToSpawnBoss: 8
+  KillCountToSpawnBoss: 10
   boss: {fileID: 4945927370063486209, guid: 47ad72cc3a31de34697efcc61fd63c8f, type: 3}
 --- !u!1 &1345410687
 GameObject:
@@ -3866,10 +3866,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227a015562a62ac4d8118cdf50100552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelDifficulty
-  mobHealthMultiplier: 1
+  mobHealthMultiplier: 1.5
   mobAttackSpeedMultiplier: 1
-  bossHealthMultiplier: 1
-  bossAttackSpeedMultiplier: 1
+  bossHealthMultiplier: 1.25
+  bossAttackSpeedMultiplier: 1.2
 --- !u!1 &1928391247
 GameObject:
   m_ObjectHideFlags: 0

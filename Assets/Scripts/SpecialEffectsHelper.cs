@@ -6,7 +6,7 @@ public class SpecialEffectsHelper : MonoBehaviour
 
     public ParticleSystem fireEffect;
 
-    public GameObject spawnObjectContainer;
+    public GameObject spawnObjectContainer; // set in logic script
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()

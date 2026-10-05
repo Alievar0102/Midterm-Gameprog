@@ -11,6 +11,8 @@ public class Health : MonoBehaviour
     Spawner spawner;
     Logic logic;
 
+    LevelDifficulty levelDifficulty;
+
     SpriteRenderer spriteRenderer;
     SpriteRenderer[] spriteRenderers;
     public SpriteRenderer mobSize;
@@ -24,9 +26,13 @@ public class Health : MonoBehaviour
     {
         spawner = FindFirstObjectByType<Spawner>();
         logic = FindFirstObjectByType<Logic>();
+        levelDifficulty = FindFirstObjectByType<LevelDifficulty>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null) spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        if (isBoss) health = (int)(health * levelDifficulty.bossHealthMultiplier);
+        else if (!isPlayer) health = (int)(health * levelDifficulty.mobHealthMultiplier);
 
         maxHealth = health;
 
@@ -65,7 +71,7 @@ public class Health : MonoBehaviour
                 for (int i = 1; i < spriteRenderers.Length; i++) bounds.Encapsulate(spriteRenderers[i].bounds);
 
                 scale = bounds.size.x / mobSize.bounds.size.x;
-            } else scale = spriteRenderer.bounds.size.x / mobSize.bounds.size.x;
+            } else if (!isBullet) scale = spriteRenderer.bounds.size.x / mobSize.bounds.size.x;
 
             SpecialEffectsHelper.Instance.Explode(transform.position, scale);
 
